@@ -13,5 +13,8 @@ utils.o : utils.h
 find_min_max.o : utils.h find_min_max.h
 	$(CC) -o find_min_max.o -c find_min_max.c $(CFLAGS)
 
+run_exec : run_exec.c
+	$(CC) -o run_exec -c run_exec.c $(CFLAGS)
+
 clean :
 	rm utils.o find_min_max.o
