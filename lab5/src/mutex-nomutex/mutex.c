@@ -1,4 +1,3 @@
-
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -14,14 +13,16 @@ pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 int main() {
   pthread_t thread1, thread2;
 
-  if (pthread_create(&thread1, NULL, (void *)do_one_thing,
-			  (void *)&common) != 0) {
+  printf("Execute with mutex\n'");
+
+  if (pthread_create(&thread1, NULL, (void *) do_one_thing,
+                     (void *) &common) != 0) {
     perror("pthread_create");
     exit(1);
   }
 
-  if (pthread_create(&thread2, NULL, (void *)do_another_thing,
-                     (void *)&common) != 0) {
+  if (pthread_create(&thread2, NULL, (void *) do_another_thing,
+                     (void *) &common) != 0) {
     perror("pthread_create");
     exit(1);
   }
@@ -51,10 +52,9 @@ void do_one_thing(int *pnum_times) {
     work = *pnum_times;
     printf("counter = %d\n", work);
     work++; /* increment, but not write */
-    for (k = 0; k < 500000; k++)
-      ;                 /* long cycle */
+    for (k = 0; k < 500000; k++);                 /* long cycle */
     *pnum_times = work; /* write back */
-	   pthread_mutex_unlock(&mut);
+    pthread_mutex_unlock(&mut);
   }
 }
 
@@ -68,10 +68,9 @@ void do_another_thing(int *pnum_times) {
     work = *pnum_times;
     printf("counter = %d\n", work);
     work++; /* increment, but not write */
-    for (k = 0; k < 500000; k++)
-      ;                 /* long cycle */
+    for (k = 0; k < 500000; k++);                 /* long cycle */
     *pnum_times = work; /* write back */
-     pthread_mutex_unlock(&mut);
+    pthread_mutex_unlock(&mut);
   }
 }
 
