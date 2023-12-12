@@ -12,7 +12,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#include "fndFactorial.h"
+#include "factorial.h"
 
 struct Server
 {

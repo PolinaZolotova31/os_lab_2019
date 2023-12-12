@@ -12,7 +12,7 @@
 #include <sys/types.h>
 
 #include "pthread.h"
-#include "fndFactorial.h"
+#include "factorial.h"
 
 
 void *ThreadFactorial(void *args)
